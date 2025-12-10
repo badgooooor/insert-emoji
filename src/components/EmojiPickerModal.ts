@@ -2,14 +2,14 @@ import { App, Editor, Modal } from "obsidian";
 import { emojis } from "../constants/emojis";
 
 export default class EmojiPickerModal extends Modal {
-  editor: Editor;
+  private readonly editor: Editor;
 
   constructor(app: App, editor: Editor) {
     super(app);
     this.editor = editor;
   }
 
-  onOpen() {
+  onOpen(): void {
     const { contentEl } = this;
 
     contentEl.empty();
@@ -19,7 +19,9 @@ export default class EmojiPickerModal extends Modal {
     this.modalEl.style.width = "fit-content";
 
     // Scrollable wrapper for emojis
-    const scrollWrapper = contentEl.createDiv({ cls: "emoji-scroll-wrapper" });
+    const scrollWrapper: HTMLDivElement = contentEl.createDiv({
+      cls: "emoji-scroll-wrapper",
+    });
     scrollWrapper.style.maxHeight = "300px";
     scrollWrapper.style.overflowY = "scroll";
     scrollWrapper.style.overflowX = "hidden";
@@ -27,33 +29,39 @@ export default class EmojiPickerModal extends Modal {
     scrollWrapper.style.paddingRight = "8px";
 
     // Container for emojis
-    const emojiContainer = scrollWrapper.createDiv({ cls: "emoji-grid" });
+    const emojiContainer: HTMLDivElement = scrollWrapper.createDiv({
+      cls: "emoji-grid",
+    });
     emojiContainer.style.display = "grid";
     emojiContainer.style.gridTemplateColumns = "repeat(8, 1fr)";
     emojiContainer.style.gap = "2px";
     emojiContainer.style.width = "fit-content";
 
-    emojis.forEach((emoji) => {
-      const button = emojiContainer.createEl("button", { text: emoji });
-      button.style.fontSize = "24px";
-      button.style.padding = "4px";
-      button.style.border = "0px";
-      button.style.background = "var(--background-primary)";
-      button.style.cursor = "pointer";
-      button.style.width = "40px";
-      button.style.height = "40px";
-      button.style.display = "flex";
-      button.style.alignItems = "center";
-      button.style.justifyContent = "center";
-
-      button.addEventListener("click", () => {
-        this.editor.replaceSelection(emoji);
-      });
-    });
+    emojis.forEach((emoji: string) =>
+      this.renderEmojiButton(emojiContainer, emoji),
+    );
   }
 
-  onClose() {
+  onClose(): void {
     const { contentEl } = this;
     contentEl.empty();
+  }
+
+  private renderEmojiButton(container: HTMLDivElement, emoji: string): void {
+    const button = container.createEl("button", { text: emoji });
+    button.style.fontSize = "24px";
+    button.style.padding = "4px";
+    button.style.border = "0px";
+    button.style.background = "var(--background-primary)";
+    button.style.cursor = "pointer";
+    button.style.width = "40px";
+    button.style.height = "40px";
+    button.style.display = "flex";
+    button.style.alignItems = "center";
+    button.style.justifyContent = "center";
+
+    button.addEventListener("click", () => {
+      this.editor.replaceSelection(emoji);
+    });
   }
 }
