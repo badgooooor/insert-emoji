@@ -21,6 +21,7 @@
     "dist"
   ],
   "scripts": {
+    "dev": "unbuild --watch",
     "build": "unbuild",
     "lint": "eslint --cache .",
     "lint:fix": "eslint --cache --fix .",
