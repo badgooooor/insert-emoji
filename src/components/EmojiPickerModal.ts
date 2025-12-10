@@ -21,9 +21,10 @@ export default class EmojiPickerModal extends Modal {
     // Scrollable wrapper for emojis
     const scrollWrapper = contentEl.createDiv({ cls: "emoji-scroll-wrapper" });
     scrollWrapper.style.maxHeight = "300px";
-    scrollWrapper.style.overflowY = "auto";
+    scrollWrapper.style.overflowY = "scroll";
     scrollWrapper.style.overflowX = "hidden";
     scrollWrapper.style.marginTop = "16px";
+    scrollWrapper.style.paddingRight = "8px";
 
     // Container for emojis
     const emojiContainer = scrollWrapper.createDiv({ cls: "emoji-grid" });
@@ -31,7 +32,6 @@ export default class EmojiPickerModal extends Modal {
     emojiContainer.style.gridTemplateColumns = "repeat(8, 1fr)";
     emojiContainer.style.gap = "2px";
     emojiContainer.style.width = "fit-content";
-    emojiContainer.style.overflowY = "scroll";
 
     emojis.forEach((emoji) => {
       const button = emojiContainer.createEl("button", { text: emoji });
