@@ -49,7 +49,6 @@ export default class EmojiPickerModal extends Modal {
 
       button.addEventListener("click", () => {
         this.editor.replaceSelection(emoji);
-        this.close();
       });
     });
   }
