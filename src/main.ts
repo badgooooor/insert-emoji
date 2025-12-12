@@ -1,22 +1,22 @@
-import { Plugin } from "obsidian";
+import { Plugin } from 'obsidian'
 
-import EmojiPickerModal from "./components/EmojiPickerModal";
+import EmojiPickerModal from './components/EmojiPickerModal'
 
 export default class EmojiPlugin extends Plugin {
   async onload() {
     // Register event listener for editor context menu
     this.registerEvent(
-      this.app.workspace.on("editor-menu", (menu, editor, view) => {
+      this.app.workspace.on('editor-menu', (menu, editor, _) => {
         menu.addItem((item) => {
           item
-            .setTitle("Insert emoji")
-            .setIcon("smile")
+            .setTitle('Insert emoji')
+            .setIcon('smile')
             .onClick(() => {
               // Open emoji picker modal
-              new EmojiPickerModal(this.app, editor).open();
-            });
-        });
+              new EmojiPickerModal(this.app, editor).open()
+            })
+        })
       }),
-    );
+    )
   }
 }
