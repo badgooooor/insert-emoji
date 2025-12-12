@@ -1,0 +1,10 @@
+{
+  "id": "insert-emoji",
+  "name": "Insert Emoji",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Insert emoji into your Obsidian notes",
+  "author": "Yuttakhan B.",
+  "authorUrl": "https://github.com/badgooooor",
+  "isDesktopOnly": false
+}
